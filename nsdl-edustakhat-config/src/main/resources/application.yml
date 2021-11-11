@@ -1,0 +1,38 @@
+server:
+  port: 9078
+
+spring:
+ application:
+  name: nsdl-edastakhat-conf-service
+ #profile: svn
+ cloud:
+  config:
+   server:
+    svn:
+     uri: https://172.16.135.74/svn/nsdl/dev-pne/e-dastakhat/config
+     #force-pull: true
+     #clone-on-start: true
+     username: nikhilw
+     password: nsdl1234
+     searchPaths: piyushm
+     basedir: target/config
+     #default-label: trunk
+    #default-label: nikhil
+        #git:
+        #  uri: https://github.com/pcf-guides/configuration-server-config-repo
+        
+ profiles:
+  active: uat
+
+logging:
+  level:
+    root: info
+
+eureka:
+  instance:
+    instanceId: EDUSTAKHAT_CONF_MS:${server.port}
+ 
+  client:
+    service-url:
+     defaultZone: http://nsdl-edastakhat-dis:8081/eureka/
+     

@@ -1,0 +1,48 @@
+server:
+  port: 9078
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          username: nikwan
+          password: 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
+          clone-on-start: true
+          default-label: master
+          basedir: /nsdl-projects/edastakhat/config
+          search-paths:
+          - /edastakhat-deploy/config/*
+          uri: https://github.com/NSDL-e-Governance/edastakhat-deploy.git
+          skip-ssl-validation: true
+          timeout: 10
+  application:
+   name: nsdl-edastakhat-conf-service
+---         
+logging:
+  level:
+    '[com.nsdl.edustakhat.conf]': debug
+    #'[com.nsdl.edustakhat.conf]': debug
+    '[com.netflix.discovery.shared.resolver.aws.ConfigClusterResolver]': warn
+debug: false
+---
+logging:
+  level:
+    root: INFO
+---    
+eureka:
+  instance:
+    prefer-ip-address: true
+    instanceId: EDUSTAKHAT_CONF_MS:${server.port}
+    hostname: ed-registry
+ 
+  client:
+    service-url:
+     defaultZone: http://ed-registry-0.ed-registry.default.svc.cluster.local:8067/eureka,http://ed-registry-0.ed-registry.default.svc.cluster.local:8067/eureka
+    enabled: true
+    fetch-registry: true
+    register-with-eureka: true
+    
+    
+    
+     
